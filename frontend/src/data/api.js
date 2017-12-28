@@ -1,99 +1,119 @@
 const apiUrl = process.env.API_URL ? process.env.API_URL : 'http://localhost:3001'
 
+const token = localStorage.token ? localStorage.token : Math.random().toString(36).substring(5)
+
+const headers = {
+  'Accept': 'application/json',
+  'Authorization': token
+}
+
 export async function getPostsByCategory(category) {
-  return await fetch(`${apiUrl}/${category}/posts/`).json()
+  const result = await fetch(`${apiUrl}/${category}/posts/`, { headers })
+  return await result.json()
 }
 
 export async function getAllCategories() {
-  return await fetch(`${apiUrl}/categories`).json()
+  const result = await fetch(`${apiUrl}/categories`, { headers })
+  return await result.json()
 }
 
-export function getAllPosts() {
-  return await fetch(`${apiUrl}/posts`).json()
+export async function getAllPosts() {
+  const result = await fetch(`${apiUrl}/posts`, { headers })
+  return await result.json()
 }
 
 export async function getPost(postId) {
-  return await fetch(`${apiUrl}/posts/${postId}`).json()
+  const result = await fetch(`${apiUrl}/posts/${postId}`, { headers })
+  return await result.json()
 }
 
 export async function addPost(post) {
-  return await fetch(`${apiUrl}/posts`, {
+  const result = await fetch(`${apiUrl}/posts`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
     },
     body: post
-  }).json()
+  })
+  return await result.json()
 }
 
 export async function vote(postId, vote) {
-  return await fetch(`${apiUrl}/posts/${postId}`, {
+  const result = await fetch(`${apiUrl}/posts/${postId}`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
     },
     body: { option: vote }
-  }).json()
+  })
+  return await result.json()
 }
 
 export async function updatePost(post) {
-  return await fetch(`${apiUrl}/posts/${post.id}`, {
+  const result = await fetch(`${apiUrl}/posts/${post.id}`, {
     method: 'PUT',
     headers: {
       'Content-Type': 'application/json'
     },
     body: { title: post.title, body: post.body }
-  }).json()
+  })
+  return await result.json()
 }
 
 export async function deletePost(postId) {
-  return await fetch(`${apiUrl}/posts/${postId}`, {
+  const result = await fetch(`${apiUrl}/posts/${postId}`, {
     method: 'DELETE',
     headers: {
       'Content-Type': 'application/json'
     }
-  }).json()
+  })
+  return await result.json()
 }
 
 export async function getCommentsByPost(postId) {
-  return await fetch(`${apiUrl}/posts/${postId}/comments`).json()
+  const result = await fetch(`${apiUrl}/posts/${postId}/comments`, { headers })
+  return await result.json()
 }
 
 export async function addComment(comment) {
-  return await fetch(`${apiUrl}/comments`, {
+  const result = await fetch(`${apiUrl}/comments`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
     },
     body: comment
-  }).json()
+  })
+  return await result.json()
 }
 
 export async function voteComment(commentId, vote) {
-  return await fetch(`${apiUrl}/comments/${commentId}`, {
+  const result = await fetch(`${apiUrl}/comments/${commentId}`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
     },
     body: { option: vote }
-  }).json()
+  })
+  return await result.json()
 }
 
 export async function updateComment(commentId, timestamp, body) {
-  return await fetch(`${apiUrl}/comments/${commentId}`, {
+  const result = await fetch(`${apiUrl}/comments/${commentId}`, {
     method: 'PUT',
     headers: {
       'Content-Type': 'application/json'
     },
     body: { timestamp, body }
-  }).json()
+  })
+  return await result.json()
 }
 
 export async function deleteComment(commentId) {
-  return await fetch(`${apiUrl}/comments/${commentId}`, {
+  const result = await fetch(`${apiUrl}/comments/${commentId}`, {
     method: 'DELETE',
     headers: {
       'Content-Type': 'application/json'
     }
-  }).json()
+  })
+  return await result.json()
 }

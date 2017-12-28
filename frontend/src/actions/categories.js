@@ -1,10 +1,13 @@
-import { getCategories } from '../data.api.js'
+import { getAllCategories } from '../data/api.js'
 import { GET_CATEGORIES } from './types'
 
-export const fetchCategories = async () => {
-  const categories =  await getCategories();
+export function fetchAllCategories(categories) {
   return {
     type: GET_CATEGORIES,
     categories
   }
-};
+}
+
+export const fetchCategories = () => dispatch => (
+  getAllCategories().then(categories => dispatch(fetchAllCategories(categories)))
+);
