@@ -17,8 +17,12 @@ export async function getAllCategories() {
   return await result.json()
 }
 
-export async function getAllPosts() {
-  const result = await fetch(`${apiUrl}/posts`, { headers })
+export async function getAllPosts(category) {
+  let url = apiUrl;
+  if(category && category.length > 0) {
+    url = `${url}/${category}`
+  }
+  const result = await fetch(`${url}/posts`, { headers })
   return await result.json()
 }
 
