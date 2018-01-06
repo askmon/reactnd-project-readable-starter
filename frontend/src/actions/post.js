@@ -38,7 +38,6 @@ export function getPostsCategory (postsCategory) {
 export const fetchPosts = (category) => dispatch => (
   api.getAllPosts(category)
     .then(data => {
-      console.log(data);
       if (!category || category === '') {
         dispatch(getPosts(data))
       } else {
@@ -59,15 +58,15 @@ export const createNewPost = (post) => dispatch => (
     .then(data => dispatch(createPost(data)))
 );
 
-export function vote (post) {
+export function vote (postWithNewScore) {
   return {
     type: UPDATE_VOTE,
-    post
+    postWithNewScore
   }
 }
 
-export const updateNewPostScore = (id, vote) => dispatch => (
-  api.vote(id, vote)
+export const updateNewPostScore = (id, voteValue) => dispatch => (
+  api.vote(id, voteValue)
     .then(data => dispatch(vote(data)))
 );
 

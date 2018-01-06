@@ -34,9 +34,7 @@ export async function getPost(postId) {
 export async function addPost(post) {
   const result = await fetch(`${apiUrl}/posts`, {
     method: 'POST',
-    headers: {
-      'Content-Type': 'application/json'
-    },
+    headers,
     body: post
   })
   return await result.json()
@@ -45,9 +43,7 @@ export async function addPost(post) {
 export async function vote(postId, vote) {
   const result = await fetch(`${apiUrl}/posts/${postId}`, {
     method: 'POST',
-    headers: {
-      'Content-Type': 'application/json'
-    },
+    headers,
     body: { option: vote }
   })
   return await result.json()
@@ -56,9 +52,7 @@ export async function vote(postId, vote) {
 export async function updatePost(post) {
   const result = await fetch(`${apiUrl}/posts/${post.id}`, {
     method: 'PUT',
-    headers: {
-      'Content-Type': 'application/json'
-    },
+    headers,
     body: { title: post.title, body: post.body }
   })
   return await result.json()
@@ -67,9 +61,7 @@ export async function updatePost(post) {
 export async function deletePost(postId) {
   const result = await fetch(`${apiUrl}/posts/${postId}`, {
     method: 'DELETE',
-    headers: {
-      'Content-Type': 'application/json'
-    }
+    headers
   })
   return await result.json()
 }
@@ -82,9 +74,7 @@ export async function getCommentsByPost(postId) {
 export async function addComment(comment) {
   const result = await fetch(`${apiUrl}/comments`, {
     method: 'POST',
-    headers: {
-      'Content-Type': 'application/json'
-    },
+    headers,
     body: comment
   })
   return await result.json()
@@ -93,9 +83,7 @@ export async function addComment(comment) {
 export async function voteComment(commentId, vote) {
   const result = await fetch(`${apiUrl}/comments/${commentId}`, {
     method: 'POST',
-    headers: {
-      'Content-Type': 'application/json'
-    },
+    headers,
     body: { option: vote }
   })
   return await result.json()
@@ -104,9 +92,7 @@ export async function voteComment(commentId, vote) {
 export async function updateComment(commentId, timestamp, body) {
   const result = await fetch(`${apiUrl}/comments/${commentId}`, {
     method: 'PUT',
-    headers: {
-      'Content-Type': 'application/json'
-    },
+    headers,
     body: { timestamp, body }
   })
   return await result.json()
@@ -115,9 +101,7 @@ export async function updateComment(commentId, timestamp, body) {
 export async function deleteComment(commentId) {
   const result = await fetch(`${apiUrl}/comments/${commentId}`, {
     method: 'DELETE',
-    headers: {
-      'Content-Type': 'application/json'
-    }
+    headers
   })
   return await result.json()
 }

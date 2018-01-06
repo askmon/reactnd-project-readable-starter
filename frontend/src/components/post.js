@@ -2,14 +2,14 @@ import React, { Component } from 'react'
 import { Redirect } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
-import {Card, CardActions, CardHeader, CardText} from 'material-ui/Card';
-import { fetchPost, deletePost } from '../actions'
+import { Card, CardActions, CardHeader, CardText, Button } from 'material-ui/Card';
+import { fetchPost, deletePost, updateNewPostScore } from '../actions'
 import FlatButton from 'material-ui/FlatButton';
 
 class Post extends Component {
   constructor() {
     super()
-    this.state = {redirect: false}
+    this.state = { redirect: false }
   }
 
   componentDidMount() {
@@ -18,11 +18,15 @@ class Post extends Component {
   }
 
   componentDidUpdate() {
-    Object.keys(this.props.postReducer.post).length === 0 && (this.setState({redirect: true}))
+    Object.keys(this.props.postReducer.post).length === 0 && (this.setState({ redirect: true }))
   }
 
   handleDelete() {
-    this.props.deletePostById(this.props.match.params.id)
+    this.props.deletePostById(this.props.id)
+  }
+
+  handleVote(e, vote) {
+    this.props.updateNewPostScore(this.props.id, vote)
   }
 
   render() {
@@ -30,15 +34,14 @@ class Post extends Component {
       return <Redirect to='/' />
     }
 
-    let { title, body, author, voteScore } = this.props.postReducer.post
-    let { id } = this.props.id
+    let { title, body, author, voteScore } = this.props
 
     return (
-      <div className="post" style={{marginTop: '30px'}}>
-        <Card className="post-item" style={{maxWidth: '800px', margin: '0 auto'}}>
+      <div className="post" style={{ marginTop: '30px' }}>
+        <Card className="post-item" style={{ maxWidth: '800px', margin: '0 auto' }}>
           <CardHeader
-           title={title}
-           subtitle={`by: ${author}`}
+            title={title}
+            subtitle={`by: ${author}`}
           />
 
           <CardText>
@@ -46,10 +49,12 @@ class Post extends Component {
           </CardText>
 
           <CardText>
-            score: {voteScore} <br/>
+            score: {voteScore} <br />
           </CardText>
 
           <CardActions>
+            <FlatButton onClick={e => this.handleVote(e, 'upVote')} label="+" />
+            <FlatButton onClick={e => this.handleVote(e, 'downVote')} label="-" />
             <FlatButton onClick={this.handleDelete} label="Delete" />
           </CardActions>
         </Card>
@@ -58,11 +63,11 @@ class Post extends Component {
   }
 }
 
-function mapStateToProps ({ postReducer, commentReducer }) {
+function mapStateToProps({ postReducer, commentReducer }) {
   return { postReducer, commentReducer }
 }
 
 export default connect(
   mapStateToProps,
-  { fetchPost, deletePost }
+  { fetchPost, deletePost, updateNewPostScore }
 )(Post);

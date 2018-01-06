@@ -24,7 +24,6 @@ function postReducer(state = initialState, action) {
     }
     case GET_POSTS:
       const { initialPosts } = action
-      console.log(initialPosts)
       return {
         ...state,
         posts: initialPosts
@@ -64,10 +63,10 @@ function postReducer(state = initialState, action) {
     case UPDATE_VOTE:
       const { postWithNewScore } = action
       const updatedPosts = state.posts.map(p => {
-        return p =  p.id === postWithNewScore.id ? postWithNewScore : p
+        return p = p.id === postWithNewScore.id ? postWithNewScore : p
       })
       const updatedCategoryPosts = state.categoryPosts.map(p => {
-        return p =  p.id === postWithNewScore.id ? postWithNewScore : p
+        return p = p.id === postWithNewScore.id ? postWithNewScore : p
       })
       return {
         ...state,

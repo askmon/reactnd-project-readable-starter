@@ -15,7 +15,6 @@ class PostList extends Component {
   }
 
   render() {
-    console.log(this.props, 'adwadw')
     switch (this.state.sortType) {
       case 'vote':
         this.props.posts.sort((a, b) => b.voteScore - a.voteScore)
@@ -28,11 +27,11 @@ class PostList extends Component {
       return (
         <Post
           id={post.id}
-          postTitle={post.title}
-          postAuthor={post.author}
-          postDate={date.toString()}
-          postBody={post.body}
-          currentScore={post.voteScore}
+          title={post.title}
+          author={post.author}
+          date={date.toString()}
+          body={post.body}
+          voteScore={post.voteScore}
         />
       )
     })
