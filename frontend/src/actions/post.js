@@ -18,13 +18,13 @@ export function getPost (post) {
 
 export const fetchPost = (postId) => dispatch => (
   api.getPost(postId)
-    .then(data => dispatch(getSinglePost(data)))
+    .then(data => dispatch(getPost(data)))
 );
 
-export function getPosts (posts) {
+export function getPosts (initialPosts) {
   return {
     type: GET_POSTS,
-    posts
+    initialPosts
   }
 }
 
@@ -35,13 +35,14 @@ export function getPostsCategory (postsCategory) {
   }
 }
 
-export const fetchPosts = () => dispatch => (
+export const fetchPosts = (category) => dispatch => (
   api.getAllPosts(category)
     .then(data => {
+      console.log(data);
       if (!category || category === '') {
-        dispatch(getPostsData(data))
+        dispatch(getPosts(data))
       } else {
-        dispatch(getCategoryPostsData(data))
+        dispatch(getPostsCategory(data))
       }
     })
 );
@@ -60,7 +61,7 @@ export const createNewPost = (post) => dispatch => (
 
 export function vote (post) {
   return {
-    type: UPDATE_POST,
+    type: UPDATE_VOTE,
     post
   }
 }
@@ -78,7 +79,7 @@ export function editPost (post) {
 }
 
 export const editPostAsync = (postId, title, body) => dispatch => (
-  api.editPost(editId, title, body)
+  api.updatePost(postId, title, body)
     .then(data => dispatch(editPost(data)))
 );
 
@@ -90,6 +91,6 @@ export function deletePost (postId) {
 }
 
 export const deletePostAsync = (postId) => dispatch => (
-  API.deletePost(postId)
+  api.deletePost(postId)
     .then(data => dispatch(deletePost(data.id)))
 );
