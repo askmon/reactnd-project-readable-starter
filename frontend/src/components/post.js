@@ -7,6 +7,8 @@ import FlatButton from 'material-ui/FlatButton';
 import Vote from './vote';
 import CommentList from './comment-list'
 
+let id = null;
+
 class Post extends Component {
   constructor() {
     super()
@@ -29,11 +31,11 @@ class Post extends Component {
   }
 
   handleDelete() {
-    this.props.deletePostAsync(this.props.id)
+    this.props.deletePostAsync(this.id)
   }
 
   handleVote(e, vote) {
-    this.props.updateNewPostScore(this.props.id, vote)
+    this.props.updateNewPostScore(this.id, vote)
   }
 
   render() {
@@ -46,7 +48,7 @@ class Post extends Component {
 
     if(this.props.match && this.props.match.params.id) {
       id = this.props.match.params.id
-      this.props.id = id
+      this.id = id
       title = this.props.postReducer.post.title;
       body = this.props.postReducer.post.body;
       author = this.props.postReducer.post.author;
@@ -66,7 +68,7 @@ class Post extends Component {
         <Card className="post-item" style={{ maxWidth: '800px', margin: '0 auto' }}>
           <CardHeader
             title={title}
-            subtitle={`by: ${author}`}
+            subtitle={author}
           />
 
           <CardText>
@@ -74,7 +76,8 @@ class Post extends Component {
           </CardText>
 
           <CardText>
-            score: {voteScore} <br />
+            Score: {voteScore} <br />
+            Comments: {comments.length}
           </CardText>
 
           <CardActions>

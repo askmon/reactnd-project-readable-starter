@@ -6,6 +6,9 @@ import IconMenu from 'material-ui/IconMenu';
 import MenuItem from 'material-ui/MenuItem';
 import IconButton from 'material-ui/IconButton';
 import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert';
+import FloatingActionButton from 'material-ui/FloatingActionButton';
+import ContentAdd from 'material-ui/svg-icons/content/add';
+import { Link } from 'react-router-dom'
 
 class Home extends Component {
 
@@ -17,7 +20,7 @@ class Home extends Component {
   render() {
     return (
       <div>
-        <div styles={{float: "right"}}>
+        <div styles={{float: "left"}}>
           <IconMenu
             iconButtonElement={<IconButton><MoreVertIcon /></IconButton>}
             anchorOrigin={{horizontal: 'left', vertical: 'top'}}
@@ -27,6 +30,11 @@ class Home extends Component {
               <MenuItem>{category.name}</MenuItem>
             )}
           </IconMenu>
+          {/* <Link to={`/post-add`}>
+            <FloatingActionButton mini={true} style={{marginRight: 20}}>
+              <ContentAdd />
+            </FloatingActionButton>
+          </Link> */}
         </div>
         <div>
           { this.props.posts &&

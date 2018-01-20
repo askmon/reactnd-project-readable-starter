@@ -44,8 +44,8 @@ class PostList extends Component {
           value={this.state.sortType}
           onChange={this.handleChange}
         >
-          <MenuItem value="date" primaryText="date" />
-          <MenuItem value="vote" primaryText="vote" />
+          <MenuItem value="date" primaryText="Date" />
+          <MenuItem value="vote" primaryText="Vote" />
         </DropDownMenu>
         {posts}
       </div>

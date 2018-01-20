@@ -70,10 +70,10 @@ export const updateNewPostScore = (id, voteValue) => dispatch => (
     .then(data => dispatch(vote(data)))
 );
 
-export function editPost (post) {
+export function editPost (editedPost) {
   return {
     type: EDIT_POST,
-    post
+    editedPost
   }
 }
 
