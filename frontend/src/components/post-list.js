@@ -32,6 +32,7 @@ class PostList extends Component {
           date={date.toString()}
           body={post.body}
           voteScore={post.voteScore}
+          fromList={true}
         />
       )
     })

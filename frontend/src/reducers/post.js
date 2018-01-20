@@ -53,12 +53,12 @@ function postReducer(state = initialState, action) {
         post: editedPost
       }
     case DELETE_POST:
-      const { deletedId } = action
+      const { postId } = action
       return {
         ...state,
-        posts: state.posts.filter(p => p.id !== deletedId),
-        categoryPosts: state.categoryPosts.filter(p => p.id !== deletedId),
-        post: state.post.id === deletedId ? {} : state.post
+        posts: state.posts.filter(post => post.id !== postId),
+        categoryPosts: state.categoryPosts.filter(p => p.id !== postId),
+        post: state.post.id === postId ? {} : state.post
       }
     case UPDATE_VOTE:
       const { postWithNewScore } = action

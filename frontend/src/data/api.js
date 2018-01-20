@@ -4,7 +4,8 @@ const token = localStorage.token ? localStorage.token : Math.random().toString(3
 
 const headers = {
   'Accept': 'application/json',
-  'Authorization': token
+  'Authorization': token,
+  'Content-Type': 'application/json',
 }
 
 export async function getPostsByCategory(category) {
@@ -35,16 +36,17 @@ export async function addPost(post) {
   const result = await fetch(`${apiUrl}/posts`, {
     method: 'POST',
     headers,
-    body: post
+    body:  JSON.stringify(post)
   })
   return await result.json()
 }
 
 export async function vote(postId, vote) {
+  console.log(postId);
   const result = await fetch(`${apiUrl}/posts/${postId}`, {
     method: 'POST',
     headers,
-    body: { option: vote }
+    body: JSON.stringify({option: vote})
   })
   return await result.json()
 }
@@ -53,7 +55,7 @@ export async function updatePost(post) {
   const result = await fetch(`${apiUrl}/posts/${post.id}`, {
     method: 'PUT',
     headers,
-    body: { title: post.title, body: post.body }
+    body:  JSON.stringify({ title: post.title, body: post.body })
   })
   return await result.json()
 }
@@ -75,7 +77,7 @@ export async function addComment(comment) {
   const result = await fetch(`${apiUrl}/comments`, {
     method: 'POST',
     headers,
-    body: comment
+    body: JSON.stringify(comment)
   })
   return await result.json()
 }
@@ -84,7 +86,7 @@ export async function voteComment(commentId, vote) {
   const result = await fetch(`${apiUrl}/comments/${commentId}`, {
     method: 'POST',
     headers,
-    body: { option: vote }
+    body:  JSON.stringify({ option: vote })
   })
   return await result.json()
 }
@@ -93,7 +95,7 @@ export async function updateComment(commentId, timestamp, body) {
   const result = await fetch(`${apiUrl}/comments/${commentId}`, {
     method: 'PUT',
     headers,
-    body: { timestamp, body }
+    body:  JSON.stringify({ timestamp, body })
   })
   return await result.json()
 }

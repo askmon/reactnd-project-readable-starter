@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
-import Drawer from 'material-ui/Drawer';
-import MenuItem from 'material-ui/MenuItem';
 import { fetchCategories, fetchPosts } from '../actions';
 import { connect } from 'react-redux';
 import PostList from './post-list';
+import IconMenu from 'material-ui/IconMenu';
+import MenuItem from 'material-ui/MenuItem';
+import IconButton from 'material-ui/IconButton';
+import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert';
 
 class Home extends Component {
 
@@ -16,11 +18,15 @@ class Home extends Component {
     return (
       <div>
         <div styles={{float: "right"}}>
-          <Drawer open={true} width="10%">
+          <IconMenu
+            iconButtonElement={<IconButton><MoreVertIcon /></IconButton>}
+            anchorOrigin={{horizontal: 'left', vertical: 'top'}}
+            targetOrigin={{horizontal: 'left', vertical: 'top'}}
+          >
             {this.props.categories.map((category) =>
               <MenuItem>{category.name}</MenuItem>
             )}
-          </Drawer>
+          </IconMenu>
         </div>
         <div>
           { this.props.posts &&

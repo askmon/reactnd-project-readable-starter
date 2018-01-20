@@ -30,7 +30,7 @@ export function createComment (newComment) {
 }
 
 export const createNewComment = (comment) => dispatch => (
-  api.newComment(comment)
+  api.addComment(comment)
     .then(data => data.json())
     .then(data => {
       dispatch(createComment(data))})
@@ -44,7 +44,7 @@ export function updateCommentScore (commentWithNewScore) {
 }
 
 export const updateNewCommentScore = (id, score) => dispatch => (
-  api.updateCommentScore(id, score)
+  api.voteComment(id, score)
     .then(data => dispatch(updateCommentScore(data)))
 );
 
@@ -57,7 +57,7 @@ export function editComment (editedComment) {
 }
 
 export const editCommentById = (editId, timeStamp, body) => dispatch => (
-  api.editComment(editId, timeStamp, body)
+  api.updateComment(editId, timeStamp, body)
     .then(data => dispatch(editComment(data)))
 );
 
