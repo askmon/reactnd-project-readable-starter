@@ -7,7 +7,6 @@ import {
   DELETE_COMMENT
 } from './types'
 
-// GET COMMENTS
 export function getComments (comments, postId) {
   return {
     type: GET_COMMENTS,
@@ -21,7 +20,6 @@ export const fetchCommentsByPostId = (id) => dispatch => (
     .then(data => dispatch(getComments(data, id)))
 );
 
-// POST
 export function createComment (newComment) {
   return {
     type: ADD_COMMENT,
@@ -48,7 +46,6 @@ export const updateNewCommentScore = (id, score) => dispatch => (
     .then(data => dispatch(updateCommentScore(data)))
 );
 
-// EDIT COMMENT
 export function editComment (editedComment) {
   return {
     type: EDIT_COMMENT,
@@ -61,7 +58,6 @@ export const editCommentById = (editId, timeStamp, body) => dispatch => (
     .then(data => dispatch(editComment(data)))
 );
 
-// DELETE COMMENT
 export function deleteComment (deletedId, parentId) {
   return {
     type: DELETE_COMMENT,

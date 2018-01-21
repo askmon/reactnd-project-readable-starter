@@ -4,6 +4,7 @@ import Home from  './components/home';
 import Post from './components/post';
 import PostForm from './components/post-form';
 import Category from './components/category';
+import CommentForm from './components/comment-form'
 import './app.css';
 
 class App extends Component {
@@ -16,6 +17,7 @@ class App extends Component {
           <Route exact path="/post-edit/:id/:author/:title/:body" component={PostForm} />
           <Route exact path="/:category" component={Category} />
           <Route exact path="/:category/:id" component={Post} />
+          <Route exact path="/comments/:id/:author/:body" component={CommentForm} />
         </Switch>
       </div>
     );
