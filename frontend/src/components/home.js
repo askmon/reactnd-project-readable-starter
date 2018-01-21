@@ -27,14 +27,11 @@ class Home extends Component {
             targetOrigin={{horizontal: 'left', vertical: 'top'}}
           >
             {this.props.categories.map((category) =>
-              <MenuItem>{category.name}</MenuItem>
+              <Link to={`/${category.name}`}>
+                <MenuItem>{category.name}</MenuItem>
+              </Link>
             )}
           </IconMenu>
-          {/* <Link to={`/post-add`}>
-            <FloatingActionButton mini={true} style={{marginRight: 20}}>
-              <ContentAdd />
-            </FloatingActionButton>
-          </Link> */}
         </div>
         <div>
           { this.props.posts &&

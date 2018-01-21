@@ -6,7 +6,7 @@ export default function CommentList ({comments}) {
     const date = new Date(comment.timestamp)
     return (
       <div>
-        <p>Comments:</p> 
+        <p>Comment:</p> 
         <li key={comment.id} style={{marginTop: '20px', marginBottom: '20px'}}>
           <Comment
             id={comment.id}

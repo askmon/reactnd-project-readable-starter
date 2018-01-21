@@ -42,7 +42,6 @@ export async function addPost(post) {
 }
 
 export async function vote(postId, vote) {
-  console.log(postId);
   const result = await fetch(`${apiUrl}/posts/${postId}`, {
     method: 'POST',
     headers,
@@ -52,6 +51,7 @@ export async function vote(postId, vote) {
 }
 
 export async function updatePost(post) {
+  console.log(post);
   const result = await fetch(`${apiUrl}/posts/${post.id}`, {
     method: 'PUT',
     headers,

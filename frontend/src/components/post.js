@@ -27,7 +27,9 @@ class Post extends Component {
   }
 
   componentDidUpdate() {
-    Object.keys(this.props.postReducer.post).length === 0 && (this.setState({ redirect: true }))
+    if(this.props.match && this.props.match.params.id) {
+      Object.keys(this.props.postReducer.post).length === 0 && (this.setState({ redirect: true }))
+    }
   }
 
   handleDelete() {
@@ -44,7 +46,7 @@ class Post extends Component {
     }
     
     let id = null;
-    let title, body, author, voteScore, fromList = null
+    let title, body, author, voteScore, fromList, category = null
 
     if(this.props.match && this.props.match.params.id) {
       id = this.props.match.params.id
@@ -53,6 +55,7 @@ class Post extends Component {
       body = this.props.postReducer.post.body;
       author = this.props.postReducer.post.author;
       voteScore = this.props.postReducer.post.voteScore;
+      category = this.props.postReducer.post.category;
     } else {
       id = this.props.id;
       title = this.props.title;
@@ -60,6 +63,7 @@ class Post extends Component {
       author = this.props.author;
       voteScore = this.props.voteScore;
       fromList = this.props.fromList;
+      category = this.props.category;
     }
     const { comments } = this.props.commentReducer
 
@@ -88,10 +92,10 @@ class Post extends Component {
             fromList &&
               <CardActions>
                 <FlatButton onClick={this.handleDelete} label="Delete" />
-                <Link to={`/post/${id}`}>
+                <Link to={`/${category}/${id}`}>
                   <FlatButton label="Details" />
                 </Link>
-                <Link to={`/post-edit/${id}/${title}/${body}`}>
+                <Link to={`/post-edit/${id}/${author}/${title}/${body}`}>
                   <FlatButton label="Edit" />
                 </Link>
               </CardActions>

@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import * as actions from '../actions/post'
 import FlatButton from 'material-ui/FlatButton';
 import TextField from 'material-ui/TextField';
+import { createNewPost, editPostAsync } from '../actions';
 
 class PostForm extends Component {
   constructor(props) {
@@ -12,9 +13,9 @@ class PostForm extends Component {
       title: '',
       body: '',
       author: '',
-      placeholderTitle: 'your title here',
-      placeholderBody: 'your content here',
-      placeholderAuthor: 'your name',
+      placeholderTitle: 'Title',
+      placeholderBody: 'Content',
+      placeholderAuthor: 'Your name',
       warning: ''
     }
   }
@@ -23,7 +24,8 @@ class PostForm extends Component {
     this.props.match && (
       this.setState({
         title: this.props.match.params.title,
-        body: this.props.match.params.body
+        body: this.props.match.params.body,
+        author: this.props.match.params.author
       })
     )
   }
@@ -41,22 +43,23 @@ class PostForm extends Component {
     if (this.state.title === '' || this.state.body === '' || this.state.author === '' ) {
       this.setState({warning: 'All fields required'})
     }
-    if (!this.props.match.id) {
+    if (!this.props.match.params.id) {
       this.props.createNewPost({
         id: Math.random().toString(36).substring(5),
         timestamp: Date.now(),
         title: this.state.title,
         body: this.state.body,
         author: this.state.author,
-        category: this.props.category
+        category: this.props.match.params.category
       })
-    } else {
       this.props.history.goBack()
-      this.props.editPost(
+    } else {
+      this.props.editPostAsync(
         this.props.match.params.id,
         this.state.title,
         this.state.body
       )
+      this.props.history.goBack()
     }
   }
 
@@ -81,7 +84,7 @@ class PostForm extends Component {
             placeholder={this.state.placeholderBody}
             style={{display: 'block', width: '100%', margin: 'auto'}}
           />
-          {!this.props.match.id && (
+          {!this.props.match.params.id && (
             <TextField
               value={this.state.author}
               onChange={(e) => this.updateAuthor(e.target.value)}
@@ -97,4 +100,4 @@ class PostForm extends Component {
   }
 }
 
-export default connect(null, actions)(PostForm);
+export default connect(null, { createNewPost, editPostAsync })(PostForm);

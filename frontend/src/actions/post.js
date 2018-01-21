@@ -78,7 +78,11 @@ export function editPost (editedPost) {
 }
 
 export const editPostAsync = (postId, title, body) => dispatch => (
-  api.updatePost(postId, title, body)
+  api.updatePost({
+    id: postId, 
+    title,
+    body
+  })
     .then(data => dispatch(editPost(data)))
 );
 

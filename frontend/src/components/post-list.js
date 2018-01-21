@@ -29,6 +29,7 @@ class PostList extends Component {
           id={post.id}
           title={post.title}
           author={post.author}
+          category={post.category}
           date={date.toString()}
           body={post.body}
           voteScore={post.voteScore}
