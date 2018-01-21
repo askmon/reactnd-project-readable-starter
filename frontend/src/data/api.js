@@ -51,7 +51,6 @@ export async function vote(postId, vote) {
 }
 
 export async function updatePost(post) {
-  console.log(post);
   const result = await fetch(`${apiUrl}/posts/${post.id}`, {
     method: 'PUT',
     headers,

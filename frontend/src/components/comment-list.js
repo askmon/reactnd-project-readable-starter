@@ -5,7 +5,7 @@ export default function CommentList ({comments}) {
   const commentItems = comments.map(comment => {
     const date = new Date(comment.timestamp)
     return (
-      <div>
+      <div key={comment.id}>
         <p>Comment:</p> 
         <li key={comment.id} style={{marginTop: '20px', marginBottom: '20px'}}>
           <Comment
@@ -15,6 +15,7 @@ export default function CommentList ({comments}) {
             score={comment.voteScore}
             commentDate={date.toString()}
             parentId={comment.parentId}
+            key={comment.id}
           />
         </li>
       </div>

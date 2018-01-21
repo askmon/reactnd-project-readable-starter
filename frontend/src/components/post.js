@@ -6,8 +6,7 @@ import { fetchPost, deletePostAsync, fetchCommentsByPostId } from '../actions'
 import FlatButton from 'material-ui/FlatButton';
 import Vote from './vote';
 import CommentList from './comment-list'
-
-let id = null;
+import CommentForm from './comment-form'
 
 class Post extends Component {
   constructor() {
@@ -46,7 +45,7 @@ class Post extends Component {
     }
     
     let id = null;
-    let title, body, author, voteScore, fromList, category = null
+    let title, body, author, voteScore, fromList, category, commentCount = null
 
     if(this.props.match && this.props.match.params.id) {
       id = this.props.match.params.id
@@ -56,6 +55,7 @@ class Post extends Component {
       author = this.props.postReducer.post.author;
       voteScore = this.props.postReducer.post.voteScore;
       category = this.props.postReducer.post.category;
+      commentCount = this.props.postReducer.post.commentCount;
     } else {
       id = this.props.id;
       title = this.props.title;
@@ -64,11 +64,18 @@ class Post extends Component {
       voteScore = this.props.voteScore;
       fromList = this.props.fromList;
       category = this.props.category;
+      commentCount = this.props.commentCount;
     }
     const { comments } = this.props.commentReducer
 
     return (
       <div className="post" style={{ marginTop: '30px' }}>
+        {
+          !fromList &&
+          <Link to={`/`}>
+            <FlatButton label="Home" style={{ marginBottom: '30px' }}/>
+          </Link>
+        }
         <Card className="post-item" style={{ maxWidth: '800px', margin: '0 auto' }}>
           <CardHeader
             title={title}
@@ -81,7 +88,7 @@ class Post extends Component {
 
           <CardText>
             Score: {voteScore} <br />
-            Comments: {comments.length}
+            Comments: {commentCount}
           </CardText>
 
           <CardActions>
@@ -101,6 +108,10 @@ class Post extends Component {
               </CardActions>
           }
         </Card>
+        {
+          !fromList &&
+          <CommentForm parentId={id}/>
+        }
         {
           !fromList &&
           <CommentList comments={comments}/>

@@ -29,7 +29,6 @@ export function createComment (newComment) {
 
 export const createNewComment = (comment) => dispatch => (
   api.addComment(comment)
-    .then(data => data.json())
     .then(data => {
       dispatch(createComment(data))})
 );

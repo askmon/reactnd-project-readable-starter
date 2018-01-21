@@ -7,16 +7,13 @@ import MenuItem from 'material-ui/MenuItem';
 import IconButton from 'material-ui/IconButton';
 import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert';
 import FlatButton from 'material-ui/FlatButton';
-import ContentAdd from 'material-ui/svg-icons/content/add';
 import { Link } from 'react-router-dom'
-import Home from './home'
 
 class Category extends Component {
 
   componentDidMount() {
     this.props.fetchPosts();
     this.props.fetchCategories();
-    console.log(this.props.posts);
   }
 
   render() {
@@ -29,7 +26,7 @@ class Category extends Component {
             targetOrigin={{horizontal: 'left', vertical: 'top'}}
           >
             {this.props.categories.map((category) =>
-              <Link to={`/${category.name}`}>
+              <Link to={`/${category.name}`} key={category.name}>
                 <MenuItem>{category.name}</MenuItem>
               </Link>
             )}

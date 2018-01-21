@@ -51,7 +51,6 @@ class CommentForm extends Component {
         author: this.state.author,
         parentId: this.props.parentId
       })
-      this.props.history.goBack()
     } else {
       this.props.editCommentById(
         this.props.match.params.id,
@@ -71,7 +70,8 @@ class CommentForm extends Component {
           style={{textAlign: 'center', display: 'block', margin: 'auto', maxWidth: '800px'}}
         >
           <TextField
-            multiLine="true"
+            id="body"
+            multiLine={true}
             value={this.state.body}
             onChange={(e) => this.updateBody(e.target.value)}
             placeholder={this.state.placeholderBody}
@@ -79,6 +79,7 @@ class CommentForm extends Component {
           />
           {!this.props.match && (
             <TextField
+              id="author"
               value={this.state.author}
               onChange={(e) => this.updateAuthor(e.target.value)}
               placeholder={this.state.placeholderAuthor}

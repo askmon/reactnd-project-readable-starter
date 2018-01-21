@@ -30,10 +30,12 @@ class PostList extends Component {
           title={post.title}
           author={post.author}
           category={post.category}
+          commentCount={post.commentCount}
           date={date.toString()}
           body={post.body}
           voteScore={post.voteScore}
           fromList={true}
+          key={post.id}
         />
       )
     })

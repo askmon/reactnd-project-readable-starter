@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
-import * as actions from '../actions/post'
 import FlatButton from 'material-ui/FlatButton';
 import TextField from 'material-ui/TextField';
 import { createNewPost, editPostAsync } from '../actions';
@@ -72,12 +71,14 @@ class PostForm extends Component {
           style={{textAlign: 'center', display: 'block', margin: 'auto', maxWidth: '800px'}}
         >
           <TextField
+            id="postTitle"
             value={this.state.title}
             onChange={(e) => this.updateTitle(e.target.value)}
             placeholder={this.state.placeholderTitle}
             style={{display: 'block', width: '100%', margin: 'auto'}}
           />
           <TextField
+            id="postBody"
             multiLine={true}
             value={this.state.body}
             onChange={(e) => this.updateBody(e.target.value)}
@@ -86,6 +87,7 @@ class PostForm extends Component {
           />
           {!this.props.match.params.id && (
             <TextField
+              id="postAuthor"
               value={this.state.author}
               onChange={(e) => this.updateAuthor(e.target.value)}
               placeholder={this.state.placeholderAuthor}

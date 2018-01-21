@@ -6,8 +6,6 @@ import IconMenu from 'material-ui/IconMenu';
 import MenuItem from 'material-ui/MenuItem';
 import IconButton from 'material-ui/IconButton';
 import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert';
-import FloatingActionButton from 'material-ui/FloatingActionButton';
-import ContentAdd from 'material-ui/svg-icons/content/add';
 import { Link } from 'react-router-dom'
 
 class Home extends Component {
@@ -27,7 +25,7 @@ class Home extends Component {
             targetOrigin={{horizontal: 'left', vertical: 'top'}}
           >
             {this.props.categories.map((category) =>
-              <Link to={`/${category.name}`}>
+              <Link to={`/${category.name}`} key={category.name}>
                 <MenuItem>{category.name}</MenuItem>
               </Link>
             )}
