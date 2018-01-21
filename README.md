@@ -13,6 +13,7 @@ To get started developing right away:
     - `npm install`
     - `node server`
 * In another terminal window
+    - `cd frontend`
     - `nvm install`
     - `npm install`
     - `npm start`
