@@ -46,6 +46,7 @@ class Post extends Component {
     
     let id = null;
     let title, body, author, voteScore, fromList, category, commentCount = null
+    const { comments } = this.props.commentReducer
 
     if(this.props.match && this.props.match.params.id) {
       id = this.props.match.params.id
@@ -55,7 +56,7 @@ class Post extends Component {
       author = this.props.postReducer.post.author;
       voteScore = this.props.postReducer.post.voteScore;
       category = this.props.postReducer.post.category;
-      commentCount = this.props.postReducer.post.commentCount;
+      commentCount = comments.length;
     } else {
       id = this.props.id;
       title = this.props.title;
@@ -66,8 +67,6 @@ class Post extends Component {
       category = this.props.category;
       commentCount = this.props.commentCount;
     }
-    const { comments } = this.props.commentReducer
-
     return (
       <div className="post" style={{ marginTop: '30px' }}>
         {
