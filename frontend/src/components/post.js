@@ -33,6 +33,9 @@ class Post extends Component {
 
   handleDelete() {
     this.props.deletePostAsync(this.id)
+    if(this.props.match && this.props.match.params.id) {
+      this.props.history.goBack();
+    }
   }
 
   handleVote(e, vote) {
@@ -97,15 +100,17 @@ class Post extends Component {
           {
             fromList &&
               <CardActions>
-                <FlatButton onClick={this.handleDelete} label="Delete" />
                 <Link to={`/${category}/${id}`}>
                   <FlatButton label="Details" />
                 </Link>
-                <Link to={`/post-edit/${id}/${author}/${title}/${body}`}>
-                  <FlatButton label="Edit" />
-                </Link>
               </CardActions>
           }
+          <CardActions>
+            <FlatButton onClick={this.handleDelete} label="Delete" />
+            <Link to={`/post-edit/${id}/${author}/${title}/${body}`}>
+              <FlatButton label="Edit" />
+            </Link>
+          </CardActions>
         </Card>
         {
           !fromList &&

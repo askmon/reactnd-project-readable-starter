@@ -48,7 +48,7 @@ function postReducer(state = initialState, action) {
         state.posts[index].body = editedPost.body;
       }
       if(state.categoryPosts) {
-        const indexCategory = state.categoryPosts.findIndex(p => p.id !== editedPost.i);
+        const indexCategory = state.categoryPosts.findIndex(p => p.id !== editedPost.id);
         if(index > -1) {
           state.categoryPosts[indexCategory].title = editedPost.title;
           state.categoryPosts[indexCategory].body = editedPost.body;
