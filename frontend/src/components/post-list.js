@@ -6,7 +6,7 @@ import MenuItem from 'material-ui/MenuItem';
 class PostList extends Component {
   constructor() {
     super()
-    this.state = {sortType: 'date'}
+    this.state = {sortType: 'vote'}
     this.handleChange = this.handleChange.bind(this);
   }
 

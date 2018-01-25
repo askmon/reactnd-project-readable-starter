@@ -62,6 +62,7 @@ class Post extends Component {
       commentCount = comments.length;
     } else {
       id = this.props.id;
+      this.id = id
       title = this.props.title;
       body = this.props.body;
       author = this.props.author;

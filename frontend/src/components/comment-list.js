@@ -2,7 +2,9 @@ import React from 'react';
 import Comment from './comment'
 
 export default function CommentList ({comments}) {
-  const commentItems = comments.map(comment => {
+  const commentItems = comments
+  .sort((a, b) => b.voteScore - a.voteScore)
+  .map(comment => {
     const date = new Date(comment.timestamp)
     return (
       <div key={comment.id}>
