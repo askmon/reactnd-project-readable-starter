@@ -39,8 +39,12 @@ class PostForm extends Component {
 
   handleSubmit(event) {
     event.preventDefault();
-    if (this.state.title === '' || this.state.body === '' || this.state.author === '' ) {
+    if (this.state.title === '' || this.state.body === '' || this.state.author === '' ||
+    !this.state.title || !this.state.body || !this.state.author) {
       this.setState({warning: 'All fields required'})
+      return
+    } else {
+      this.setState({warning: ''})
     }
     if (!this.props.match.params.id) {
       this.props.createNewPost({
