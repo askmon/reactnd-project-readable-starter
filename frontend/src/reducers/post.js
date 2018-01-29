@@ -42,21 +42,25 @@ function postReducer(state = initialState, action) {
       }
     case EDIT_POST:
       const { editedPost } = action
-      const index = state.posts.findIndex(p => p.id !== editedPost.id);
+      const editedPosts = state.posts;
+      const index = editedPosts.findIndex(p => p.id !== editedPost.id);
       if(index > -1) {
-        state.posts[index].title = editedPost.title;
-        state.posts[index].body = editedPost.body;
+        editedPosts[index].title = editedPost.title;
+        editedPosts[index].body = editedPost.body;
       }
-      if(state.categoryPosts) {
-        const indexCategory = state.categoryPosts.findIndex(p => p.id !== editedPost.id);
+      const editedCategoryPosts = state.categoryPosts;
+      if(editedCategoryPosts) {
+        const indexCategory = editedCategoryPosts.findIndex(p => p.id !== editedPost.id);
         if(indexCategory > -1) {
-          state.categoryPosts[indexCategory].title = editedPost.title;
-          state.categoryPosts[indexCategory].body = editedPost.body;
+          editedCategoryPosts[indexCategory].title = editedPost.title;
+          editedCategoryPosts[indexCategory].body = editedPost.body;
         }
       }
       return {
         ...state,
-        post: editedPost
+        post: editedPost,
+        posts: editedPosts,
+        categoryPosts: editedCategoryPosts
       }
     case DELETE_POST:
       const { postId } = action
